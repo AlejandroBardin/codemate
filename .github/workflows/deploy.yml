@@ -6,7 +6,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: github.repository == 'AlejandroBardin/terral-viajes'
+    if: github.repository == 'AlejandroBardin/codemate'
 
     steps:
       - name: Checkout code

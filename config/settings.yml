@@ -15,7 +15,7 @@ google_analytics_id: <%= ENV['GOOGLE_ANALYTICS_ID'] || '' %>
 # Mailer
 mailer:
   from: <%= Rails.application.credentials.dig(:mailer, :from) || 'noreply@codemate.com' %>
-  host: <%= Rails.application.credentials.dig(:mailer, :host) || 'codemate.bibilioteca-dev.com.ar' %>
+  host: <%= Rails.application.credentials.dig(:mailer, :host) || 'codemate.com.ar' %>
 
 # SEO
 seo:

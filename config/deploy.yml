@@ -16,7 +16,7 @@ volumes:
 
 proxy:
   ssl: true
-  host: codemate.bibilioteca-dev.com.ar
+  host: codemate.com.ar
   healthcheck:
     interval: 5
 
@@ -38,7 +38,7 @@ env:
     - POSTGRES_PASSWORD
   clear:
     # DB_HOST external IP removed to avoid conflict
-    ActionMailer_Host: "codemate.bibilioteca-dev.com.ar"
+    ActionMailer_Host: "codemate.com.ar"
     # Database Config (Internal Network) - Usando DATABASE_URL para forzar conexión TCP
     DATABASE_URL: "postgres://codemate:<%= ENV['POSTGRES_PASSWORD'] %>@codemate-db:5432/codemate_production"
     DB_HOST: codemate-db
