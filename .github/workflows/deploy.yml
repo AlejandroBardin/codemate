@@ -50,4 +50,6 @@ jobs:
           echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .kamal/secrets
 
       - name: Deploy
-        run: kamal deploy
+        run: |
+          kamal accessory boot all
+          kamal deploy
