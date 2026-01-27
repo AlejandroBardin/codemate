@@ -1,0 +1,90 @@
+# Name of your application. Used to uniquely configure containers.
+service: codemate
+
+# Name of the container image.
+image: alebardin/codemate
+
+# Deploy to these servers.
+servers:
+  web:
+    hosts:
+      - 140.238.178.169
+
+# Persistent Storage
+volumes:
+  - "codemate_storage:/rails/storage"
+
+proxy:
+  ssl: true
+  host: codemate.bibilioteca-dev.com.ar
+  healthcheck:
+    interval: 5
+
+# Credentials for your image host - USA VARIABLES DE ENTORNO
+registry:
+  username: alebardin
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+# Builder configuration
+builder:
+  arch: aarch64
+  remote: ssh://ubuntu@140.238.178.169
+
+# Inject ENV variables into containers
+env:
+  secret:
+    - RAILS_MASTER_KEY
+    - POSTGRES_PASSWORD
+  clear:
+    # DB_HOST external IP removed to avoid conflict
+    ActionMailer_Host: "codemate.bibilioteca-dev.com.ar"
+    # Database Config (Internal Network) - Usando DATABASE_URL para forzar conexión TCP
+    DATABASE_URL: "postgres://codemate:<%= ENV['POSTGRES_PASSWORD'] %>@codemate-db:5432/codemate_production"
+    DB_HOST: codemate-db
+    REDIS_URL: redis://codemate-redis:6379/1
+    RAILS_LOG_LEVEL: info
+    RAILS_SERVE_STATIC_FILES: true
+    WEB_CONCURRENCY: 0
+    RAILS_MAX_THREADS: 3
+
+aliases:
+  console: app exec --interactive --reuse "bin/rails console"
+  shell: app exec --interactive --reuse "bash"
+  logs: app logs -f
+  dbc: app exec --interactive --reuse "bin/rails dbconsole"
+
+# Accessories: Postgres and Redis
+accessories:
+  db:
+    image: postgres:15
+    host: 140.238.178.169
+    port: 5433:5432
+    env:
+      secret:
+        - POSTGRES_PASSWORD
+      clear:
+        POSTGRES_USER: codemate
+        POSTGRES_DB: codemate_production
+    files:
+      - config/init.sql:/docker-entrypoint-initdb.d/setup.sql
+    directories:
+      - data/db:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7.0
+    host: 140.238.178.169
+    port: 6380:6379
+    directories:
+      - data/redis:/data
+
+boot:
+  limit: 120
+  wait: 60
+
+ssh:
+  user: ubuntu
+  # La key se lee desde Rails.application.credentials.ssh.private_key
+  # Para que Kamal la use, necesitas crear un archivo temporal o usar ssh-agent
+  # Por ahora, mantén el archivo pero lo moverás a ~/.ssh/
+  # keys: ["~/.ssh/codemate-deploy"]
