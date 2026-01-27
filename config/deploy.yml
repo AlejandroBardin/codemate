@@ -59,7 +59,7 @@ accessories:
   db:
     image: postgres:15
     host: 140.238.178.169
-    port: 5433:5432
+    port: 5435:5432
     env:
       secret:
         - POSTGRES_PASSWORD
@@ -74,7 +74,7 @@ accessories:
   redis:
     image: redis:7.0
     host: 140.238.178.169
-    port: 6380:6379
+    port: 6382:6379
     directories:
       - data/redis:/data
 
