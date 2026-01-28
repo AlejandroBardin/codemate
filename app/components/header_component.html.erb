@@ -5,8 +5,8 @@
         <%= image_tag "https://lh3.googleusercontent.com/aida-public/AB6AXuCH8lzaoeq1yPSGlD7d9_s9aHayl83mHh2EVTaW_l2r4xitJ8c4msKNC96UrzgFyLyMloYr_-PFoHUVmqK7P9m6gAz3HJK0IM4OUSI0FzTDigkhFizVmB_cshiIr9W4pPWeHxYGAsiY81CRK-ZvcLEqh_SxSYClOeTTWHAeNw5EwCxBb7jA6E3nLk62CE8PnQpZzHRTBhA1E1u_gsGQeHcsRd0qVjnnWtBtw_cTYbw44wgMR9c8o9IrAzc9bopq8FA6N1NcPSdvzuY", alt: "Terral Viajes Logo", class: "w-full h-full object-contain transform scale-125" %>
       </div>
       <div>
-        <h1 class="text-primary font-bold text-lg leading-none">TERRAL</h1>
-        <p class="text-[0.6rem] uppercase tracking-wider text-gray-500 dark:text-gray-400 font-semibold">Viajes y Turismo</p>
+        <h1 class="text-primary font-bold text-lg leading-none"><%= Setting.get('site_name', 'Codemate') %></h1>
+        <p class="text-[0.6rem] uppercase tracking-wider text-gray-500 dark:text-gray-400 font-semibold">Automation & Software</p>
       </div>
     </div>
     <div data-controller="dark-mode">

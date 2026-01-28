@@ -1,0 +1,30 @@
+/* Homepage Glassmorphism Styles */
+
+.glass-card {
+  background: linear-gradient(145deg, rgba(30, 30, 30, 0.6) 0%, rgba(20, 20, 20, 0.4) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.neon-glow {
+  box-shadow: 0 0 20px rgba(13, 127, 242, 0.15);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Glass border and background utilities */
+.border-glass-border {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.bg-glass-bg {
+  background-color: rgba(30, 30, 30, 0.6);
+}

@@ -1,9 +1,22 @@
 # frozen_string_literal: true
 
 class HeroComponent < ViewComponent::Base
-  def initialize(title:, subtitle:, image_url:)
-    @title = title
-    @subtitle = subtitle
-    @image_url = image_url
+  def initialize
+    @badge_text = Setting.get("hero_badge_text", "Accepting new clients")
+    @badge_enabled = Setting.get("hero_badge_enabled", "true") == "true"
+    @title = Setting.get("hero_title", "Building Scalable Software")
+    @title_highlight = Setting.get("hero_title_highlight", "Scalable Software")
+    @subtitle = Setting.get("hero_subtitle", "We deploy senior engineering teams")
+    @cta_primary_text = Setting.get("hero_cta_primary_text", "Start Your Sprint")
+    @cta_primary_url = Setting.get("hero_cta_primary_url", "#contact")
+    @cta_secondary_text = Setting.get("hero_cta_secondary_text", "View Portfolio")
+    @cta_secondary_url = Setting.get("hero_cta_secondary_url", "#portfolio")
+    @trusted_by_text = Setting.get("hero_trusted_by_text", "Trusted by teams at")
+    @client_logos = ClientLogo.enabled
+  end
+
+  def highlighted_title
+    return @title unless @title_highlight.present?
+    @title.gsub(@title_highlight, "<span class='text-primary'>#{@title_highlight}</span>")
   end
 end

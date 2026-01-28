@@ -1,20 +1,44 @@
-<section class="relative h-[500px] w-full overflow-hidden">
-  <div class="absolute inset-0 bg-gradient-to-b from-transparent to-background-light dark:to-background-dark z-10 h-full"></div>
-  <%= image_tag @image_url, class: "absolute inset-0 w-full h-full object-cover", alt: @title %>
-  <div class="absolute inset-0 bg-primary/30 z-0"></div>
-  <div class="relative z-20 flex flex-col justify-end h-full px-6 pb-12 text-center">
-    <span class="inline-block px-4 py-1 mb-4 bg-secondary text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-md w-max mx-auto animate-bounce">
-      Temporada 2026
-    </span>
-    <h2 class="text-4xl font-handwriting text-white mb-2 drop-shadow-md">
-      <%= @title.html_safe %>
-    </h2>
-    <p class="text-white text-sm font-medium mb-6 drop-shadow text-balance">
+<header class="relative w-full px-4 pt-12 pb-16 overflow-hidden bg-background-dark">
+  <!-- Abstract 3D Background Element -->
+  <div class="absolute top-0 right-0 w-3/4 h-full opacity-20 pointer-events-none" style="background: radial-gradient(circle at 70% 30%, #0d7ff2 0%, transparent 60%); filter: blur(60px);"></div>
+  
+  <div class="relative z-10 max-w-lg mx-auto flex flex-col gap-6">
+    <% if @badge_enabled %>
+      <div class="inline-flex w-fit items-center gap-2 rounded-full border border-glass-border bg-glass-bg px-3 py-1 backdrop-blur-sm">
+        <span class="flex h-2 w-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span>
+        <span class="text-xs font-medium text-gray-300"><%= @badge_text %></span>
+      </div>
+    <% end %>
+    
+    <h1 class="text-4xl font-black leading-[1.1] tracking-tight text-white dark:text-white sm:text-5xl">
+      <%= highlighted_title.html_safe %>
+    </h1>
+    
+    <p class="text-base leading-relaxed text-gray-400 max-w-[90%]">
       <%= @subtitle %>
     </p>
-    <a class="bg-green-500 hover:bg-green-600 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg flex items-center justify-center gap-2 transform transition hover:-translate-y-1 active:scale-95" href="https://wa.me/5493813416824">
-      <span class="material-symbols-outlined">chat</span>
-      Consultar por WhatsApp
-    </a>
+    
+    <div class="flex flex-col sm:flex-row gap-3 pt-2">
+      <a href="<%= @cta_primary_url %>" class="w-full sm:w-auto h-12 bg-primary hover:bg-blue-600 text-white font-bold rounded-lg px-6 transition-all neon-glow flex items-center justify-center gap-2">
+        <%= @cta_primary_text %>
+      </a>
+      <a href="<%= @cta_secondary_url %>" class="w-full sm:w-auto h-12 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium rounded-lg px-6 transition-all flex items-center justify-center">
+        <%= @cta_secondary_text %>
+      </a>
+    </div>
+    
+    <!-- Trusted By Client Logos -->
+    <% if @client_logos.any? %>
+      <div class="mt-8 border-t border-white/10 pt-6">
+        <p class="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-4"><%= @trusted_by_text %></p>
+        <div class="flex flex-wrap gap-6 items-center opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+          <% @client_logos.each do |logo| %>
+            <% if logo.logo_image.attached? %>
+              <%= image_tag logo.logo_image, alt: logo.name, class: "h-6 w-20 object-contain" %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
-</section>
+</header>
