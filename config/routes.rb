@@ -17,7 +17,11 @@ Rails.application.routes.draw do
     root to: "dashboard#index"
     get "dashboard", to: "dashboard#index"
     resources :packages
+    resources :client_logos
+    resources :service_cards
+    resources :case_studies
     resources :settings do
+      patch "batch_update", on: :collection
       delete "disconnect_meta", on: :collection
     end
     resource :pixel, only: [ :show, :update ]

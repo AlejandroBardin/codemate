@@ -7,11 +7,35 @@ puts "✅ Admin user ensured"
 
 # Default Settings
 [
+  # General
   { key: "whatsapp_number", value: "5493813416824" },
   { key: "facebook_pixel", value: "1166448375323223" },
-  { key: "hero_title", value: "Bienvenido a Codemate" },
-  { key: "hero_subtitle", value: "Descubrí los mejores destinos con nosotros" },
-  { key: "google_analytics_id", value: "" }
+  { key: "google_analytics_id", value: "" },
+
+  # Header
+  { key: "site_name", value: "Codemate" },
+  { key: "site_logo_url", value: "" }, # Se puede agregar después
+
+  # Hero Section
+  { key: "hero_badge_text", value: "Accepting new automation clients" },
+  { key: "hero_badge_enabled", value: "true" },
+  { key: "hero_title", value: "Building Scalable Automation for Rapid Growth Companies" },
+  { key: "hero_title_highlight", value: "Scalable Automation" },
+  { key: "hero_subtitle", value: "We deploy senior automation experts to build risk-free development sprints. Trusted by growing companies to ship faster." },
+  { key: "hero_cta_primary_text", value: "Start Your Sprint" },
+  { key: "hero_cta_primary_url", value: "#contact" },
+  { key: "hero_cta_secondary_text", value: "View Portfolio" },
+  { key: "hero_cta_secondary_url", value: "#portfolio" },
+  { key: "hero_trusted_by_text", value: "Trusted by teams at" },
+
+  # Footer CTA
+  { key: "footer_cta_title", value: "Ready to automate your business?" },
+  { key: "footer_cta_subtitle", value: "Get a custom roadmap and estimate within 24 hours." },
+  { key: "footer_cta_button_text", value: "Get Estimate" },
+  { key: "footer_cta_button_url", value: "#contact" },
+  { key: "footer_rating_text", value: "4.9/5 on Clutch" },
+  { key: "footer_badge_text", value: "n8n Certified Partner" },
+  { key: "footer_copyright", value: "© 2026 Codemate. All rights reserved." }
 ].each do |setting_attrs|
   Setting.find_or_create_by!(key: setting_attrs[:key]) do |setting|
     setting.value = setting_attrs[:value]
@@ -103,3 +127,69 @@ if mendoza && mendoza.questions.empty?
   end
   puts "✅ Questions for Mendoza package created"
 end
+# Service Cards - Herramientas reales que vendés
+[
+  {
+    position: 1,
+    title: 'n8n Automation',
+    description: 'Conectamos todas tus herramientas en flujos automatizados. Desde CRM hasta facturación, todo sincronizado sin código.',
+    link_text: 'Ver casos de uso',
+    link_url: '#',
+    enabled: true,
+    svg_code: '<svg viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18L19.82 8 12 11.82 4.18 8 12 4.18zM4 9.47l7 3.5v7.85l-7-3.5V9.47zm16 0v7.85l-7 3.5v-7.85l7-3.5z"/></svg>',
+    icon_color: 'blue-400'
+  },
+  {
+    position: 2,
+    title: 'Chatwoot Support',
+    description: 'Implementamos y personalizamos Chatwoot para centralizar WhatsApp, email y chat en vivo en una sola plataforma.',
+    link_text: 'Conocer más',
+    link_url: '#',
+    enabled: true,
+    svg_code: '<svg viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.54.36 3 .97 4.29L2 22l5.71-.97C9 21.64 10.46 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.38 0-2.68-.29-3.86-.81l-.28-.13-2.86.49.49-2.86-.13-.28C4.29 14.68 4 13.38 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>',
+    icon_color: 'green-400'
+  },
+  {
+    position: 3,
+    title: 'Custom Integrations',
+    description: 'Desarrollamos integraciones a medida entre tus sistemas legacy y herramientas modernas. APIs, webhooks y sincronización en tiempo real.',
+    link_text: 'Consultar',
+    link_url: '#',
+    enabled: true,
+    svg_code: '<svg viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>',
+    icon_color: 'purple-400'
+  }
+].each do |attrs|
+  ServiceCard.find_or_create_by!(title: attrs[:title]) do |card|
+    card.assign_attributes(attrs)
+  end
+end
+puts "✅ Service Cards ensured"
+
+# Case Study - Solo 1 caso real
+# IMPORTANTE: Necesitarás agregar una imagen real después
+# Por ahora usamos el placeholder
+case_study_attrs = {
+  position: 1,
+  title: 'TerralViajes Automation',
+  category: 'AUTOMATION',
+  metric_label: '80% Time Saved',
+  metric_color: 'green',
+  description: 'Automatizamos el flujo completo desde leads de Meta hasta WhatsApp con Chatwoot. Integramos n8n para sincronizar reservas con el CRM y enviar confirmaciones automáticas.',
+  link_url: '#',
+  enabled: true
+}
+
+CaseStudy.find_or_create_by!(title: case_study_attrs[:title]) do |study|
+  study.assign_attributes(case_study_attrs)
+
+  # Attach placeholder image (reemplazar con imagen real después)
+  if File.exist?(Rails.root.join("db/fixtures/placeholder.jpg"))
+    study.cover_image.attach(
+      io: File.open(Rails.root.join("db/fixtures/placeholder.jpg")),
+      filename: "terral-case-study.jpg",
+      content_type: "image/jpeg"
+    )
+  end
+end
+puts "✅ Case Study ensured"
