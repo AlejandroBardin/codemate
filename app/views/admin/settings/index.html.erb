@@ -126,7 +126,30 @@
         </h2>
       </div>
       <div class="p-6 space-y-4">
-        <% @hero_settings.each do |setting| %>
+        <!-- Background Image Upload -->
+        <% hero_bg_setting = Setting.find_by(key: 'hero_bg_url') %>
+        <div>
+          <%= label_tag :hero_bg_image, "Hero Background Image (Upload)", class: "block text-sm font-medium text-slate-300 mb-2" %>
+          <%= file_field_tag :hero_bg_image, accept: "image/*", class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-blue-600" %>
+          <p class="text-xs text-slate-500 mt-1">Upload hero background image. Recommended: 1920x800px</p>
+          <% if hero_bg_setting&.hero_bg_image&.attached? %>
+            <div class="mt-3 rounded-lg overflow-hidden inline-block border border-slate-700">
+              <%= image_tag hero_bg_setting.hero_bg_image, class: "h-24 object-cover" %>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- Background URL (fallback) -->
+        <% if hero_bg_setting %>
+          <div>
+            <%= label_tag "settings[hero_bg_url]", "OR Background Image URL (fallback)", class: "block text-sm font-medium text-slate-300 mb-2" %>
+            <%= text_field_tag "settings[hero_bg_url]", hero_bg_setting.value, class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary", placeholder: "https://example.com/hero-bg.jpg" %>
+            <p class="text-xs text-slate-500 mt-1">If no image uploaded, this URL will be used</p>
+          </div>
+        <% end %>
+
+        <!-- Other hero settings -->
+        <% @hero_settings.reject { |s| s.key == 'hero_bg_url' }.each do |setting| %>
           <div>
             <%= label_tag "settings[#{setting.key}]", setting.key.humanize.titleize, class: "block text-sm font-medium text-slate-300 mb-2" %>
             <% if setting.key.include?('subtitle') %>

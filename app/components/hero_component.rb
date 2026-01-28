@@ -13,6 +13,10 @@ class HeroComponent < ViewComponent::Base
     @cta_secondary_url = Setting.get("hero_cta_secondary_url", "#portfolio")
     @trusted_by_text = Setting.get("hero_trusted_by_text", "Trusted by teams at")
     @client_logos = ClientLogo.enabled
+
+    # Background image
+    @bg_setting = Setting.find_by(key: "hero_bg_url")
+    @bg_image = @bg_setting&.hero_bg_image&.attached? ? @bg_setting.hero_bg_image : Setting.get("hero_bg_url")
   end
 
   def highlighted_title

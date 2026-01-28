@@ -34,6 +34,7 @@ puts "✅ Admin user ensured"
   { key: "hero_cta_secondary_text", value: "View Portfolio" },
   { key: "hero_cta_secondary_url", value: "#portfolio" },
   { key: "hero_trusted_by_text", value: "Trusted by teams at" },
+  { key: "hero_bg_url", value: "" }, # Hero background image URL or upload
 
   # Footer CTA
   { key: "footer_cta_title", value: "Ready to automate your business?" },

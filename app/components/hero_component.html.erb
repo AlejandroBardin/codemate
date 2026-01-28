@@ -1,6 +1,15 @@
 <header class="relative w-full px-4 pt-12 pb-16 overflow-hidden bg-background-dark">
+  <!-- Background Image (if uploaded) -->
+  <% if @bg_image.present? %>
+    <div class="absolute inset-0 z-0">
+      <%= image_tag @bg_image, class: "w-full h-full object-cover" %>
+      <!-- Dark gradient overlay for text readability -->
+      <div class="absolute inset-0 bg-gradient-to-b from-background-dark/80 via-background-dark/90 to-background-dark"></div>
+    </div>
+  <% end %>
+  
   <!-- Abstract 3D Background Element -->
-  <div class="absolute top-0 right-0 w-3/4 h-full opacity-20 pointer-events-none" style="background: radial-gradient(circle at 70% 30%, #0d7ff2 0%, transparent 60%); filter: blur(60px);"></div>
+  <div class="absolute top-0 right-0 w-3/4 h-full opacity-20 pointer-events-none z-[1]" style="background: radial-gradient(circle at 70% 30%, #0d7ff2 0%, transparent 60%); filter: blur(60px);"></div>
   
   <div class="relative z-10 max-w-lg mx-auto flex flex-col gap-6">
     <% if @badge_enabled %>
@@ -10,11 +19,11 @@
       </div>
     <% end %>
     
-    <h1 class="text-4xl font-black leading-[1.1] tracking-tight text-white dark:text-white sm:text-5xl">
+    <h1 class="text-4xl font-black leading-[1.1] tracking-tight text-white dark:text-white sm:text-5xl drop-shadow-lg">
       <%= highlighted_title.html_safe %>
     </h1>
     
-    <p class="text-base leading-relaxed text-gray-400 max-w-[90%]">
+    <p class="text-base leading-relaxed text-gray-400 max-w-[90%] drop-shadow-md">
       <%= @subtitle %>
     </p>
     
