@@ -1,15 +1,138 @@
-<div class="max-w-4xl mx-auto">
+<% content_for :title, "Settings" %>
+
+<div class="max-w-6xl mx-auto">
+  <% if notice.present? %>
+    <div class="mb-6 py-3 px-4 bg-green-500/10 border border-green-500/20 text-green-400 rounded-lg">
+      <%= notice %>
+    </div>
+  <% end %>
+
   <div class="mb-8">
-    <h1 class="text-2xl font-bold text-white mb-2">Configuración</h1>
-    <p class="text-slate-400">Gestiona las integraciones y preferencias del CRM.</p>
+    <h1 class="text-2xl font-bold text-white mb-2">Settings</h1>
+    <p class="text-slate-400">Manage homepage content and integrations.</p>
   </div>
+
+  <!-- Homepage Settings Form -->
+  <%= form_with url: batch_update_admin_settings_path, method: :patch, multipart: true, class: "space-y-6 mb-8" do |f| %>
+    
+    <!-- Header Section -->
+    <div class="bg-surface-dark rounded-xl border border-slate-700/50 overflow-hidden">
+      <div class="p-6 border-b border-slate-700/50">
+        <h2 class="text-lg font-bold text-white flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">web</span>
+          Header
+        </h2>
+      </div>
+      <div class="p-6 space-y-4">
+        <!-- Logo Upload -->
+        <% logo_setting = Setting.logo %>
+        <div>
+          <%= label_tag :site_logo, "Site Logo (Upload Image)", class: "block text-sm font-medium text-slate-300 mb-2" %>
+          <%= file_field_tag :site_logo, accept: "image/*", class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-blue-600" %>
+          <p class="text-xs text-slate-500 mt-1">Upload PNG, SVG, or JPG. Transparent background recommended.</p>
+          <% if logo_setting&.site_logo&.attached? %>
+            <div class="mt-3 p-4 bg-white rounded-lg inline-block">
+              <%= image_tag logo_setting.site_logo, class: "h-12 object-contain" %>
+            </div>
+          <% end %>
+        </div>
+        
+        <!-- Site Logo URL (fallback) -->
+        <% site_logo_url_setting = @header_settings.find { |s| s.key == 'site_logo_url' } %>
+        <% if site_logo_url_setting %>
+          <div>
+            <%= label_tag "settings[site_logo_url]", "OR Site Logo URL (fallback)", class: "block text-sm font-medium text-slate-300 mb-2" %>
+            <%= text_field_tag "settings[site_logo_url]", site_logo_url_setting.value, class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary", placeholder: "https://example.com/logo.png" %>
+            <p class="text-xs text-slate-500 mt-1">If no image uploaded, this URL will be used</p>
+          </div>
+        <% end %>
+        
+        <!-- Other header settings -->
+        <% @header_settings.reject { |s| s.key == 'site_logo_url' }.each do |setting| %>
+          <div>
+            <%= label_tag "settings[#{setting.key}]", setting.key.humanize.titleize, class: "block text-sm font-medium text-slate-300 mb-2" %>
+            <%= text_field_tag "settings[#{setting.key}]", setting.value, class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary", placeholder: setting.key %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="bg-surface-dark rounded-xl border border-slate-700/50 overflow-hidden">
+      <div class="p-6 border-b border-slate-700/50">
+        <h2 class="text-lg font-bold text-white flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">rocket_launch</span>
+          Hero Section
+        </h2>
+      </div>
+      <div class="p-6 space-y-4">
+        <% @hero_settings.each do |setting| %>
+          <div>
+            <%= label_tag "settings[#{setting.key}]", setting.key.humanize.titleize, class: "block text-sm font-medium text-slate-300 mb-2" %>
+            <% if setting.key.include?('subtitle') %>
+              <%= text_area_tag "settings[#{setting.key}]", setting.value, rows: 3, class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary" %>
+            <% else %>
+              <%= text_field_tag "settings[#{setting.key}]", setting.value, class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Footer CTA Section -->
+    <div class="bg-surface-dark rounded-xl border border-slate-700/50 overflow-hidden">
+      <div class="p-6 border-b border-slate-700/50">
+        <h2 class="text-lg font-bold text-white flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">call_to_action</span>
+          Footer CTA
+        </h2>
+      </div>
+      <div class="p-6 space-y-4">
+        <% @footer_settings.each do |setting| %>
+          <div>
+            <%= label_tag "settings[#{setting.key}]", setting.key.humanize.titleize, class: "block text-sm font-medium text-slate-300 mb-2" %>
+            <% if setting.key.include?('subtitle') %>
+              <%= text_area_tag "settings[#{setting.key}]", setting.value, rows: 2, class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary" %>
+            <% else %>
+              <%= text_field_tag "settings[#{setting.key}]", setting.value, class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- General Settings -->
+    <% if @general_settings.any? %>
+      <div class="bg-surface-dark rounded-xl border border-slate-700/50 overflow-hidden">
+        <div class="p-6 border-b border-slate-700/50">
+          <h2 class="text-lg font-bold text-white flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">settings</span>
+            General
+          </h2>
+        </div>
+        <div class="p-6 space-y-4">
+          <% @general_settings.each do |setting| %>
+            <div>
+              <%= label_tag "settings[#{setting.key}]", setting.key.humanize.titleize, class: "block text-sm font-medium text-slate-300 mb-2" %>
+              <%= text_field_tag "settings[#{setting.key}]", setting.value, class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <!-- Submit Button -->
+    <div class="flex justify-end">
+      <%= f.submit "Save All Settings", class: "px-6 py-3 bg-primary hover:bg-blue-600 text-white font-bold rounded-lg transition-colors cursor-pointer" %>
+    </div>
+  <% end %>
 
   <!-- Integrations Card -->
   <div class="bg-surface-dark rounded-xl border border-slate-700/50 overflow-hidden">
     <div class="p-6 border-b border-slate-700/50">
       <h2 class="text-lg font-bold text-white flex items-center gap-2">
         <span class="material-symbols-outlined text-primary">extension</span>
-        Integraciones
+        Integrations
       </h2>
     </div>
 
@@ -22,13 +145,13 @@
           </div>
           <div>
             <h3 class="text-white font-medium text-base">Facebook Lead Ads</h3>
-            <p class="text-slate-400 text-sm mt-1">Sincroniza leads y creativos automáticamente.</p>
+            <p class="text-slate-400 text-sm mt-1">Sync leads and creatives automatically.</p>
 
             <% if @meta_connection %>
               <div class="mt-3 flex items-center gap-2">
                 <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                   <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                  Conectado: <%= @meta_connection.page_name %>
+                  Connected: <%= @meta_connection.page_name %>
                 </span>
               </div>
             <% end %>
@@ -38,24 +161,23 @@
         <div>
           <% if @meta_connection %>
             <%= button_to disconnect_meta_admin_settings_path, method: :delete, class: "px-4 py-2 text-sm font-medium text-red-400 hover:bg-red-900/20 rounded-lg transition-colors border border-transparent hover:border-red-900/30" do %>
-              Desconectar
+              Disconnect
             <% end %>
           <% else %>
             <%
-              # Construct OAuth URL manually for simplicity or use a helper
               app_id = Rails.application.credentials.dig(:meta, :app_id)
               redirect_uri = auth_meta_callback_url
               scope = "leads_retrieval,pages_manage_metadata,pages_read_engagement,ads_management,pages_show_list,business_management"
               oauth_url = "https://www.facebook.com/v19.0/dialog/oauth?client_id=#{app_id}&redirect_uri=#{redirect_uri}&scope=#{scope}&response_type=code"
             %>
             <a href="<%= oauth_url %>" class="flex items-center gap-2 px-4 py-2 bg-[#1877F2] hover:bg-[#1877F2]/90 text-white text-sm font-bold rounded-lg transition-colors shadow-lg shadow-blue-900/20">
-              Conectar Página
+              Connect Page
             </a>
           <% end %>
         </div>
       </div>
 
-      <!-- Chatwoot (Placeholder status) -->
+      <!-- Chatwoot -->
       <div class="p-6 flex items-start justify-between bg-slate-800/30">
         <div class="flex gap-4">
           <div class="w-12 h-12 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400">
@@ -63,11 +185,11 @@
           </div>
           <div>
             <h3 class="text-white font-medium text-base">Chatwoot</h3>
-            <p class="text-slate-400 text-sm mt-1">CRM de conversaciones conectado.</p>
+            <p class="text-slate-400 text-sm mt-1">Connected CRM for conversations.</p>
              <div class="mt-3 flex items-center gap-2">
                 <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                   <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                  Activo
+                  Active
                 </span>
               </div>
           </div>

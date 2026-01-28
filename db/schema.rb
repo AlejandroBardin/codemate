@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_26_193927) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_28_170613) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -40,6 +40,29 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_26_193927) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "case_studies", force: :cascade do |t|
+    t.string "category"
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.boolean "enabled", default: true
+    t.string "link_url"
+    t.string "metric_color", default: "green"
+    t.string "metric_label"
+    t.integer "position", default: 0, null: false
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
+    t.index ["position"], name: "index_case_studies_on_position"
+  end
+
+  create_table "client_logos", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.boolean "enabled", default: true
+    t.string "name", null: false
+    t.integer "position", default: 0, null: false
+    t.datetime "updated_at", null: false
+    t.index ["position"], name: "index_client_logos_on_position"
   end
 
   create_table "leads", force: :cascade do |t|
@@ -120,6 +143,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_26_193927) do
     t.index ["kind"], name: "index_questions_on_kind"
     t.index ["package_id", "enabled"], name: "index_questions_on_package_id_and_enabled"
     t.index ["package_id"], name: "index_questions_on_package_id"
+  end
+
+  create_table "service_cards", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.boolean "enabled", default: true
+    t.string "icon_color"
+    t.string "link_text"
+    t.string "link_url"
+    t.integer "position", default: 0, null: false
+    t.text "svg_code"
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
+    t.index ["position"], name: "index_service_cards_on_position"
   end
 
   create_table "sessions", force: :cascade do |t|
