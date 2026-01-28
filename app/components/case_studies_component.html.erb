@@ -1,0 +1,84 @@
+<section class="px-4 py-12 bg-[#0F0F0F] border-t border-white/5">
+  <div class="max-w-7xl mx-auto">
+    <% if @single_featured %>
+      <!-- Featured Layout: Solo 1 caso -->
+      <div class="flex flex-col gap-2 mb-8">
+        <h2 class="text-2xl font-bold text-white dark:text-white">Featured Case Study</h2>
+        <p class="text-gray-400 text-sm">Our latest success story.</p>
+      </div>
+      
+      <% study = @studies.first %>
+      <div class="glass-card rounded-xl overflow-hidden border border-white/5 md:flex md:flex-row">
+        <% if study.cover_image.attached? %>
+          <div class="md:w-1/2 h-64 md:h-auto bg-cover bg-center" style="background-image: url('<%= url_for(study.cover_image) %>');">
+            <div class="w-full h-full bg-black/40 flex items-end p-6">
+              <div class="bg-black/70 px-3 py-1.5 rounded text-xs font-bold text-white backdrop-blur-sm">
+                <%= study.category %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        
+        <div class="md:w-1/2 p-8 flex flex-col justify-center">
+          <div class="flex justify-between items-start mb-4">
+            <h3 class="text-3xl font-bold text-white dark:text-white"><%= study.title %></h3>
+            <span class="text-<%= study.metric_color %>-400 font-bold text-lg bg-<%= study.metric_color %>-400/10 px-3 py-1.5 rounded whitespace-nowrap">
+              <%= study.metric_label %>
+            </span>
+          </div>
+          <p class="text-gray-300 text-base leading-relaxed mb-6"><%= study.description %></p>
+          <% if study.link_url.present? %>
+            <a href="<%= study.link_url %>" class="inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">
+              Read Full Case Study <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+          <% end %>
+        </div>
+      </div>
+      
+    <% else %>
+      <!-- Carousel Layout: Múltiples casos -->
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-2xl font-bold text-white dark:text-white">Proven Results</h2>
+        <div class="flex gap-2">
+          <button class="h-8 w-8 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-white/10">
+            <span class="material-symbols-outlined text-sm">arrow_back</span>
+          </button>
+          <button class="h-8 w-8 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-white/10">
+            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="flex gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-4">
+        <% @studies.each do |study| %>
+          <div class="min-w-[85%] md:min-w-[400px] snap-center glass-card rounded-xl overflow-hidden border border-white/5 flex flex-col">
+            <% if study.cover_image.attached? %>
+              <div class="h-40 bg-cover bg-center" style="background-image: url('<%= url_for(study.cover_image) %>');">
+                <div class="w-full h-full bg-black/40 flex items-end p-4">
+                  <div class="bg-black/70 px-2 py-1 rounded text-xs font-bold text-white backdrop-blur-sm">
+                    <%= study.category %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            
+            <div class="p-5 flex flex-col flex-1">
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="text-xl font-bold text-white dark:text-white"><%= study.title %></h3>
+                <span class="text-<%= study.metric_color %>-400 font-bold text-sm bg-<%= study.metric_color %>-400/10 px-2 py-1 rounded">
+                  <%= study.metric_label %>
+                </span>
+              </div>
+              <p class="text-gray-400 text-sm mb-6 flex-1"><%= study.description %></p>
+              <% if study.link_url.present? %>
+                <button class="w-full py-2 rounded border border-white/10 text-sm font-medium hover:bg-white/5 transition-colors">
+                  Read Case Study
+                </button>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</section>
