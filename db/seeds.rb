@@ -17,6 +17,11 @@ puts "✅ Admin user ensured"
   { key: "site_logo_url", value: "" }, # Se puede agregar después
   { key: "site_tagline", value: "Automation & Software" },
 
+  # Promo Banner
+  { key: "promo_banner_enabled", value: "true" },
+  { key: "promo_banner_text", value: "🎉 LANZAMIENTO 2026" },
+  { key: "promo_banner_subtitle", value: "15% OFF en todos los paquetes - Solo por tiempo limitado" },
+
   # Hero Section
   { key: "hero_badge_text", value: "Accepting new automation clients" },
   { key: "hero_badge_enabled", value: "true" },

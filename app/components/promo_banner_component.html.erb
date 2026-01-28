@@ -1,0 +1,28 @@
+<% if @promo_enabled %>
+  <div class="relative overflow-hidden bg-gradient-to-r from-primary via-blue-600 to-primary animate-gradient-x">
+    <!-- Animated background pattern -->
+    <div class="absolute inset-0 opacity-20">
+      <div class="absolute inset-0" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,.05) 10px, rgba(255,255,255,.05) 20px);"></div>
+    </div>
+    
+    <div class="relative px-4 py-3 flex items-center justify-center gap-3 text-center">
+      <!-- Pulsing icon -->
+      <span class="flex h-3 w-3 relative">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+      </span>
+      
+      <div class="flex-1 max-w-md">
+        <p class="text-white font-black text-sm uppercase tracking-wider">
+          <%= @promo_text %>
+        </p>
+        <p class="text-white/90 text-xs font-medium mt-0.5">
+          <%= @promo_subtitle %>
+        </p>
+      </div>
+      
+      <!-- Sparkle emoji -->
+      <span class="text-xl animate-bounce">✨</span>
+    </div>
+  </div>
+<% end %>
