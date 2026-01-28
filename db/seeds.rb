@@ -21,6 +21,7 @@ puts "✅ Admin user ensured"
   { key: "promo_banner_enabled", value: "true" },
   { key: "promo_banner_text", value: "🎉 LANZAMIENTO 2026" },
   { key: "promo_banner_subtitle", value: "15% OFF en todos los paquetes - Solo por tiempo limitado" },
+  { key: "promo_banner_bg_url", value: "" }, # Background image URL or upload
 
   # Hero Section
   { key: "hero_badge_text", value: "Accepting new automation clients" },

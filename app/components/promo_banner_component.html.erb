@@ -1,11 +1,20 @@
 <% if @promo_enabled %>
   <div class="relative overflow-hidden bg-gradient-to-r from-primary via-blue-600 to-primary animate-gradient-x">
+    <!-- Background Image (if uploaded) -->
+    <% if @bg_image.present? %>
+      <div class="absolute inset-0 z-0">
+        <%= image_tag @bg_image, class: "w-full h-full object-cover" %>
+        <!-- Dark overlay for text readability -->
+        <div class="absolute inset-0 bg-gradient-to-r from-primary/90 via-blue-600/90 to-primary/90"></div>
+      </div>
+    <% end %>
+    
     <!-- Animated background pattern -->
-    <div class="absolute inset-0 opacity-20">
+    <div class="absolute inset-0 opacity-20 z-10">
       <div class="absolute inset-0" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,.05) 10px, rgba(255,255,255,.05) 20px);"></div>
     </div>
     
-    <div class="relative px-4 py-3 flex items-center justify-center gap-3 text-center">
+    <div class="relative z-20 px-4 py-3 flex items-center justify-center gap-3 text-center">
       <!-- Pulsing icon -->
       <span class="flex h-3 w-3 relative">
         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
@@ -13,10 +22,10 @@
       </span>
       
       <div class="flex-1 max-w-md">
-        <p class="text-white font-black text-sm uppercase tracking-wider">
+        <p class="text-white font-black text-sm uppercase tracking-wider drop-shadow-lg">
           <%= @promo_text %>
         </p>
-        <p class="text-white/90 text-xs font-medium mt-0.5">
+        <p class="text-white/90 text-xs font-medium mt-0.5 drop-shadow-md">
           <%= @promo_subtitle %>
         </p>
       </div>
