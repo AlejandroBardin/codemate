@@ -16,6 +16,12 @@ class Admin::SettingsController < Admin::BaseController
       logo_setting.site_logo.attach(params[:site_logo])
     end
 
+    # Handle promo banner background image
+    if params[:promo_bg_image].present?
+      promo_bg_setting = Setting.find_or_create_by(key: "promo_banner_bg_url")
+      promo_bg_setting.promo_bg_image.attach(params[:promo_bg_image])
+    end
+
     # Handle regular settings
     params[:settings]&.each do |key, value|
       Setting.find_or_create_by(key: key).update(value: value)

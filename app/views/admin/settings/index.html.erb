@@ -57,6 +57,66 @@
       </div>
     </div>
 
+    <!-- Promo Banner Section -->
+    <div class="bg-surface-dark rounded-xl border border-slate-700/50 overflow-hidden">
+      <div class="p-6 border-b border-slate-700/50">
+        <h2 class="text-lg font-bold text-white flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">campaign</span>
+          Promo Banner
+        </h2>
+      </div>
+      <div class="p-6 space-y-4">
+        <!-- Enable/Disable -->
+        <% promo_enabled = @general_settings.find { |s| s.key == 'promo_banner_enabled' } %>
+        <% if promo_enabled %>
+          <div>
+            <%= label_tag "settings[promo_banner_enabled]", "Enable Promo Banner", class: "block text-sm font-medium text-slate-300 mb-2" %>
+            <%= select_tag "settings[promo_banner_enabled]", options_for_select([["Enabled", "true"], ["Disabled", "false"]], promo_enabled.value), class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white focus:border-primary focus:ring-1 focus:ring-primary" %>
+          </div>
+        <% end %>
+
+        <!-- Background Image Upload -->
+        <% promo_bg_setting = Setting.find_by(key: 'promo_banner_bg_url') %>
+        <div>
+          <%= label_tag :promo_bg_image, "Background Image (Upload)", class: "block text-sm font-medium text-slate-300 mb-2" %>
+          <%= file_field_tag :promo_bg_image, accept: "image/*", class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-blue-600" %>
+          <p class="text-xs text-slate-500 mt-1">Upload banner background image. Recommended: 1920x100px</p>
+          <% if promo_bg_setting&.promo_bg_image&.attached? %>
+            <div class="mt-3 rounded-lg overflow-hidden inline-block border border-slate-700">
+              <%= image_tag promo_bg_setting.promo_bg_image, class: "h-16 object-cover" %>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- Background URL (fallback) -->
+        <% if promo_bg_setting %>
+          <div>
+            <%= label_tag "settings[promo_banner_bg_url]", "OR Background Image URL (fallback)", class: "block text-sm font-medium text-slate-300 mb-2" %>
+            <%= text_field_tag "settings[promo_banner_bg_url]", promo_bg_setting.value, class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary", placeholder: "https://example.com/banner-bg.jpg" %>
+            <p class="text-xs text-slate-500 mt-1">If no image uploaded, this URL will be used</p>
+          </div>
+        <% end %>
+
+        <!-- Promo Text -->
+        <% promo_text = @general_settings.find { |s| s.key == 'promo_banner_text' } %>
+        <% if promo_text %>
+          <div>
+            <%= label_tag "settings[promo_banner_text]", "Promo Text", class: "block text-sm font-medium text-slate-300 mb-2" %>
+            <%= text_field_tag "settings[promo_banner_text]", promo_text.value, class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary", placeholder: "🎉 LANZAMIENTO 2026" %>
+          </div>
+        <% end %>
+
+        <!-- Promo Subtitle -->
+        <% promo_subtitle = @general_settings.find { |s| s.key == 'promo_banner_subtitle' } %>
+        <% if promo_subtitle %>
+          <div>
+            <%= label_tag "settings[promo_banner_subtitle]", "Promo Subtitle", class: "block text-sm font-medium text-slate-300 mb-2" %>
+            <%= text_field_tag "settings[promo_banner_subtitle]", promo_subtitle.value, class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary", placeholder: "15% OFF en todos los paquetes" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
     <!-- Hero Section -->
     <div class="bg-surface-dark rounded-xl border border-slate-700/50 overflow-hidden">
       <div class="p-6 border-b border-slate-700/50">
