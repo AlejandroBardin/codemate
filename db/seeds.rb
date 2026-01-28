@@ -15,6 +15,7 @@ puts "✅ Admin user ensured"
   # Header
   { key: "site_name", value: "Codemate" },
   { key: "site_logo_url", value: "" }, # Se puede agregar después
+  { key: "site_tagline", value: "Automation & Software" },
 
   # Hero Section
   { key: "hero_badge_text", value: "Accepting new automation clients" },
