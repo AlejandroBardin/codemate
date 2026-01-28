@@ -152,13 +152,33 @@ end
   },
   {
     position: 3,
-    title: 'Data Analytics & CRM',
-    description: 'Conectamos tu web con Meta (CAPI) y tu CRM para un rastreo de datos preciso. Visualiza métricas de conversión reales y nutre a tus leads automáticamente.',
-    link_text: 'Optimizar mis datos →',
+    title: 'Integración de IA',
+    description: 'Implementamos asistentes de IA personalizados en tu web. Desde chatbots inteligentes hasta automatización de respuestas, análisis de datos y generación de contenido.',
+    link_text: 'Consultar →',
     link_url: '#contact',
     enabled: true,
-    svg_code: '<svg viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>',
+    svg_code: '<svg viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>',
     icon_color: 'purple-400'
+  },
+  {
+    position: 4,
+    title: 'n8n Automation',
+    description: 'Conectamos todas tus herramientas en flujos automatizados. Desde CRM hasta facturación, todo sincronizado sin código.',
+    link_text: 'Ver casos de uso',
+    link_url: '#',
+    enabled: false,
+    svg_code: '<svg viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18L19.82 8 12 11.82 4.18 8 12 4.18zM4 9.47l7 3.5v7.85l-7-3.5V9.47zm16 0v7.85l-7 3.5v-7.85l7-3.5z"/></svg>',
+    icon_color: 'blue-400'
+  },
+  {
+    position: 5,
+    title: 'Chatwoot Support',
+    description: 'Implementamos y personalizamos Chatwoot para centralizar WhatsApp, email y chat en vivo en una sola plataforma.',
+    link_text: 'Conocer más',
+    link_url: '#',
+    enabled: false,
+    svg_code: '<svg viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.54.36 3 .97 4.29L2 22l5.71-.97C9 21.64 10.46 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.38 0-2.68-.29-3.86-.81l-.28-.13-2.86.49.49-2.86-.13-.28C4.29 14.68 4 13.38 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>',
+    icon_color: 'green-400'
   }
 ].each do |attrs|
   ServiceCard.find_or_create_by!(title: attrs[:title]) do |card|
