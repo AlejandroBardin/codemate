@@ -132,32 +132,32 @@ end
 [
   {
     position: 1,
-    title: 'n8n Automation',
-    description: 'Conectamos todas tus herramientas en flujos automatizados. Desde CRM hasta facturación, todo sincronizado sin código.',
-    link_text: 'Ver casos de uso',
-    link_url: '#',
+    title: 'Desarrollo Ágil & CMS a Medida',
+    description: 'Sitios web de alto impacto diseñados en tiempo récord. Incluimos un panel de administración 100% editable para que gestiones textos e imágenes sin depender de desarrolladores.',
+    link_text: 'Ver demo del panel →',
+    link_url: '/admin',
     enabled: true,
-    svg_code: '<svg viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18L19.82 8 12 11.82 4.18 8 12 4.18zM4 9.47l7 3.5v7.85l-7-3.5V9.47zm16 0v7.85l-7 3.5v-7.85l7-3.5z"/></svg>',
+    svg_code: '<svg viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg>',
     icon_color: 'blue-400'
   },
   {
     position: 2,
-    title: 'Chatwoot Support',
-    description: 'Implementamos y personalizamos Chatwoot para centralizar WhatsApp, email y chat en vivo en una sola plataforma.',
-    link_text: 'Conocer más',
-    link_url: '#',
+    title: 'E-commerce & Pasarelas de Pago',
+    description: 'Transformamos tu web en una máquina de ventas. Integración fluida de carritos de compra, checkout seguro y cobros locales/internacionales (Stripe, Mercado Pago) listos para usar.',
+    link_text: 'Consultar integración →',
+    link_url: '#contact',
     enabled: true,
-    svg_code: '<svg viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.54.36 3 .97 4.29L2 22l5.71-.97C9 21.64 10.46 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.38 0-2.68-.29-3.86-.81l-.28-.13-2.86.49.49-2.86-.13-.28C4.29 14.68 4 13.38 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>',
+    svg_code: '<svg viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>',
     icon_color: 'green-400'
   },
   {
     position: 3,
-    title: 'Custom Integrations',
-    description: 'Desarrollamos integraciones a medida entre tus sistemas legacy y herramientas modernas. APIs, webhooks y sincronización en tiempo real.',
-    link_text: 'Consultar',
-    link_url: '#',
+    title: 'Data Analytics & CRM',
+    description: 'Conectamos tu web con Meta (CAPI) y tu CRM para un rastreo de datos preciso. Visualiza métricas de conversión reales y nutre a tus leads automáticamente.',
+    link_text: 'Optimizar mis datos →',
+    link_url: '#contact',
     enabled: true,
-    svg_code: '<svg viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>',
+    svg_code: '<svg viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>',
     icon_color: 'purple-400'
   }
 ].each do |attrs|
