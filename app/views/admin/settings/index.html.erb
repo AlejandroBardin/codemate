@@ -24,13 +24,34 @@
         </h2>
       </div>
       <div class="p-6 space-y-4">
-        <% @header_settings.each do |setting| %>
+        <!-- Logo Upload -->
+        <% logo_setting = Setting.logo %>
+        <div>
+          <%= label_tag :site_logo, "Site Logo (Upload Image)", class: "block text-sm font-medium text-slate-300 mb-2" %>
+          <%= file_field_tag :site_logo, accept: "image/*", class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-blue-600" %>
+          <p class="text-xs text-slate-500 mt-1">Upload PNG, SVG, or JPG. Transparent background recommended.</p>
+          <% if logo_setting&.site_logo&.attached? %>
+            <div class="mt-3 p-4 bg-white rounded-lg inline-block">
+              <%= image_tag logo_setting.site_logo, class: "h-12 object-contain" %>
+            </div>
+          <% end %>
+        </div>
+        
+        <!-- Site Logo URL (fallback) -->
+        <% site_logo_url_setting = @header_settings.find { |s| s.key == 'site_logo_url' } %>
+        <% if site_logo_url_setting %>
+          <div>
+            <%= label_tag "settings[site_logo_url]", "OR Site Logo URL (fallback)", class: "block text-sm font-medium text-slate-300 mb-2" %>
+            <%= text_field_tag "settings[site_logo_url]", site_logo_url_setting.value, class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary", placeholder: "https://example.com/logo.png" %>
+            <p class="text-xs text-slate-500 mt-1">If no image uploaded, this URL will be used</p>
+          </div>
+        <% end %>
+        
+        <!-- Other header settings -->
+        <% @header_settings.reject { |s| s.key == 'site_logo_url' }.each do |setting| %>
           <div>
             <%= label_tag "settings[#{setting.key}]", setting.key.humanize.titleize, class: "block text-sm font-medium text-slate-300 mb-2" %>
             <%= text_field_tag "settings[#{setting.key}]", setting.value, class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary", placeholder: setting.key %>
-            <% if setting.key == 'site_logo_url' %>
-              <p class="text-xs text-slate-500 mt-1">Enter a URL for your logo image</p>
-            <% end %>
           </div>
         <% end %>
       </div>

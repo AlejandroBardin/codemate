@@ -10,9 +10,17 @@ class Admin::SettingsController < Admin::BaseController
   end
 
   def batch_update
-    params[:settings].each do |key, value|
+    # Handle logo upload separately
+    if params[:site_logo].present?
+      logo_setting = Setting.find_or_create_by(key: "site_logo_url")
+      logo_setting.site_logo.attach(params[:site_logo])
+    end
+
+    # Handle regular settings
+    params[:settings]&.each do |key, value|
       Setting.find_or_create_by(key: key).update(value: value)
     end
+
     redirect_to admin_settings_path, notice: "Settings updated successfully"
   end
 
