@@ -1,0 +1,57 @@
+<% content_for :title, "Service Cards" %>
+
+<div class="w-full">
+  <% if notice.present? %>
+    <div class="mb-6 py-3 px-4 bg-green-500/10 border border-green-500/20 text-green-400 rounded-lg">
+      <%= notice %>
+    </div>
+  <% end %>
+
+  <div class="flex justify-between items-center mb-6">
+    <div>
+      <h1 class="font-bold text-2xl text-white">Service Cards</h1>
+      <p class="text-slate-400 text-sm mt-1">Manage services displayed on homepage</p>
+    </div>
+    <%= link_to "New Service Card", new_admin_service_card_path, class: "px-5 py-3 bg-primary hover:bg-blue-600 text-white font-medium rounded-lg transition-colors" %>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <% if @service_cards.any? %>
+      <% @service_cards.each do |card| %>
+        <div class="bg-surface-dark rounded-xl border border-slate-700/50 p-6">
+          <div class="flex items-start justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <% if card.icon_type == :svg %>
+                <div class="w-10 h-10 text-primary">
+                  <%= card.render_icon %>
+                </div>
+              <% elsif card.icon_type == :custom && card.custom_icon.attached? %>
+                <%= image_tag card.custom_icon, class: "w-10 h-10 object-contain", alt: card.title %>
+              <% end %>
+              <div>
+                <h3 class="font-bold text-white"><%= card.title %></h3>
+                <span class="text-xs text-slate-500">Position: <%= card.position %></span>
+              </div>
+            </div>
+            <% if card.enabled %>
+              <span class="px-2 py-1 bg-green-500/10 text-green-400 text-xs font-medium rounded">Active</span>
+            <% else %>
+              <span class="px-2 py-1 bg-slate-700 text-slate-400 text-xs font-medium rounded">Disabled</span>
+            <% end %>
+          </div>
+          
+          <p class="text-slate-400 text-sm mb-4 line-clamp-2"><%= card.description %></p>
+          
+          <div class="flex gap-2">
+            <%= link_to "Edit", edit_admin_service_card_path(card), class: "flex-1 text-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-white text-sm font-medium rounded transition-colors" %>
+            <%= button_to "Delete", admin_service_card_path(card), method: :delete, data: { confirm: "Are you sure?" }, class: "px-3 py-2 bg-red-900/20 hover:bg-red-900/30 text-red-400 text-sm font-medium rounded transition-colors" %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="col-span-full text-center py-12">
+        <p class="text-slate-500">No service cards yet. Create your first one!</p>
+      </div>
+    <% end %>
+  </div>
+</div>

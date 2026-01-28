@@ -1,0 +1,81 @@
+<% content_for :title, @case_study.new_record? ? "New Case Study" : "Edit Case Study" %>
+
+<div class="max-w-2xl mx-auto">
+  <div class="mb-6">
+    <h1 class="font-bold text-2xl text-white"><%= @case_study.new_record? ? "New" : "Edit" %> Case Study</h1>
+  </div>
+
+  <%= form_with model: @case_study, url: @case_study.new_record? ? admin_case_studies_path : admin_case_study_path(@case_study), class: "space-y-6" do |f| %>
+    <% if @case_study.errors.any? %>
+      <div class="bg-red-900/20 border border-red-900/30 text-red-400 px-4 py-3 rounded-lg">
+        <h3 class="font-bold mb-2"><%= pluralize(@case_study.errors.count, "error") %> prohibited this case study from being saved:</h3>
+        <ul class="list-disc list-inside text-sm">
+          <% @case_study.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="bg-surface-dark rounded-xl border border-slate-700/50 p-6 space-y-4">
+      <div>
+        <%= f.label :title, class: "block text-sm font-medium text-slate-300 mb-2" %>
+        <%= f.text_field :title, class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary", placeholder: "e.g., TerralViajes Automation" %>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <%= f.label :category, class: "block text-sm font-medium text-slate-300 mb-2" %>
+          <%= f.select :category, CaseStudy::CATEGORIES, {}, class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white focus:border-primary focus:ring-1 focus:ring-primary" %>
+        </div>
+
+        <div>
+          <%= f.label :position, class: "block text-sm font-medium text-slate-300 mb-2" %>
+          <%= f.number_field :position, class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary" %>
+        </div>
+      </div>
+
+      <div>
+        <%= f.label :description, class: "block text-sm font-medium text-slate-300 mb-2" %>
+        <%= f.text_area :description, rows: 4, class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary" %>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <%= f.label :metric_label, "Metric (e.g., 80% Time Saved)", class: "block text-sm font-medium text-slate-300 mb-2" %>
+          <%= f.text_field :metric_label, class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary" %>
+        </div>
+
+        <div>
+          <%= f.label :metric_color, class: "block text-sm font-medium text-slate-300 mb-2" %>
+          <%= f.select :metric_color, CaseStudy::METRIC_COLORS, {}, class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white focus:border-primary focus:ring-1 focus:ring-primary" %>
+        </div>
+      </div>
+
+      <div>
+        <%= f.label :cover_image, class: "block text-sm font-medium text-slate-300 mb-2" %>
+        <%= f.file_field :cover_image, accept: "image/*", class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-blue-600" %>
+        <% if @case_study.cover_image.attached? %>
+          <div class="mt-2">
+            <%= image_tag @case_study.cover_image, class: "w-full h-48 object-cover rounded-lg" %>
+          </div>
+        <% end %>
+      </div>
+
+      <div>
+        <%= f.label :link_url, class: "block text-sm font-medium text-slate-300 mb-2" %>
+        <%= f.text_field :link_url, class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary", placeholder: "#" %>
+      </div>
+
+      <div class="flex items-center">
+        <%= f.check_box :enabled, class: "w-4 h-4 text-primary bg-slate-800 border-slate-700 rounded focus:ring-primary" %>
+        <%= f.label :enabled, "Enabled (show on homepage)", class: "ml-2 text-sm text-slate-300" %>
+      </div>
+    </div>
+
+    <div class="flex gap-3">
+      <%= f.submit @case_study.new_record? ? "Create Case Study" : "Update Case Study", class: "flex-1 px-6 py-3 bg-primary hover:bg-blue-600 text-white font-bold rounded-lg transition-colors cursor-pointer" %>
+      <%= link_to "Cancel", admin_case_studies_path, class: "px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-lg transition-colors" %>
+    </div>
+  <% end %>
+</div>

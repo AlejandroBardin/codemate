@@ -1,0 +1,53 @@
+<% content_for :title, "Client Logos" %>
+
+<div class="w-full">
+  <% if notice.present? %>
+    <div class="mb-6 py-3 px-4 bg-green-500/10 border border-green-500/20 text-green-400 rounded-lg">
+      <%= notice %>
+    </div>
+  <% end %>
+
+  <div class="flex justify-between items-center mb-6">
+    <div>
+      <h1 class="font-bold text-2xl text-white">Client Logos</h1>
+      <p class="text-slate-400 text-sm mt-1">Logos shown in "Trusted by" section</p>
+    </div>
+    <%= link_to "New Client Logo", new_admin_client_logo_path, class: "px-5 py-3 bg-primary hover:bg-blue-600 text-white font-medium rounded-lg transition-colors" %>
+  </div>
+
+  <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+    <% if @client_logos.any? %>
+      <% @client_logos.each do |logo| %>
+        <div class="bg-surface-dark rounded-xl border border-slate-700/50 p-4">
+          <% if logo.logo_image.attached? %>
+            <%= image_tag logo.logo_image, class: "w-full h-16 object-contain mb-3 grayscale opacity-60", alt: logo.name %>
+          <% else %>
+            <div class="w-full h-16 bg-slate-800 rounded mb-3 flex items-center justify-center">
+              <span class="material-symbols-outlined text-slate-600">image</span>
+            </div>
+          <% end %>
+          
+          <div class="text-center mb-3">
+            <p class="text-white text-sm font-medium truncate"><%= logo.name %></p>
+            <p class="text-slate-500 text-xs">Pos: <%= logo.position %></p>
+          </div>
+          
+          <% if logo.enabled %>
+            <span class="block text-center px-2 py-1 bg-green-500/10 text-green-400 text-xs font-medium rounded mb-2">Active</span>
+          <% else %>
+            <span class="block text-center px-2 py-1 bg-slate-700 text-slate-400 text-xs font-medium rounded mb-2">Disabled</span>
+          <% end %>
+          
+          <div class="flex gap-1">
+            <%= link_to "Edit", edit_admin_client_logo_path(logo), class: "flex-1 text-center px-2 py-1.5 bg-slate-800 hover:bg-slate-700 text-white text-xs font-medium rounded transition-colors" %>
+            <%= button_to "×", admin_client_logo_path(logo), method: :delete, data: { confirm: "Are you sure?" }, class: "px-2 py-1.5 bg-red-900/20 hover:bg-red-900/30 text-red-400 text-xs font-medium rounded transition-colors" %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="col-span-full text-center py-12">
+        <p class="text-slate-500">No client logos yet. Add your first one!</p>
+      </div>
+    <% end %>
+  </div>
+</div>
