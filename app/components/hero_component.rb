@@ -7,10 +7,6 @@ class HeroComponent < ViewComponent::Base
     @title = Setting.get("hero_title", "Building Scalable Software")
     @title_highlight = Setting.get("hero_title_highlight", "Scalable Software")
     @subtitle = Setting.get("hero_subtitle", "We deploy senior engineering teams")
-    @cta_primary_text = Setting.get("hero_cta_primary_text", "Start Your Sprint")
-    @cta_primary_url = Setting.get("hero_cta_primary_url", "#contact")
-    @cta_secondary_text = Setting.get("hero_cta_secondary_text", "View Portfolio")
-    @cta_secondary_url = Setting.get("hero_cta_secondary_url", "#portfolio")
     @trusted_by_text = Setting.get("hero_trusted_by_text", "Trusted by teams at")
     @client_logos = ClientLogo.enabled
 

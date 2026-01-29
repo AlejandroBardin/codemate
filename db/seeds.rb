@@ -29,10 +29,7 @@ puts "✅ Admin user ensured"
   { key: "hero_title", value: "Building Scalable Automation for Rapid Growth Companies" },
   { key: "hero_title_highlight", value: "Scalable Automation" },
   { key: "hero_subtitle", value: "We deploy senior automation experts to build risk-free development sprints. Trusted by growing companies to ship faster." },
-  { key: "hero_cta_primary_text", value: "Start Your Sprint" },
-  { key: "hero_cta_primary_url", value: "#contact" },
-  { key: "hero_cta_secondary_text", value: "View Portfolio" },
-  { key: "hero_cta_secondary_url", value: "#portfolio" },
+  { key: "hero_cta_text", value: "Asesoráte sin compromiso. Nosotros estamos para eso." },
   { key: "hero_trusted_by_text", value: "Trusted by teams at" },
   { key: "hero_bg_url", value: "" }, # Hero background image URL or upload
 
