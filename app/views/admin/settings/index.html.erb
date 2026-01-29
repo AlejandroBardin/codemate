@@ -12,10 +12,8 @@
     <p class="text-slate-400">Manage homepage content and integrations.</p>
   </div>
 
-  <!-- Homepage Settings Form -->
-  <%= form_with url: batch_update_admin_settings_path, method: :patch, multipart: true, class: "space-y-6 mb-8" do |f| %>
-    
-    <!-- Header Section -->
+  <!-- Header Section Form -->
+  <%= form_with url: batch_update_admin_settings_path, method: :patch, multipart: true, class: "mb-6" do |f| %>
     <div class="bg-surface-dark rounded-xl border border-slate-700/50 overflow-hidden">
       <div class="p-6 border-b border-slate-700/50">
         <h2 class="text-lg font-bold text-white flex items-center gap-2">
@@ -61,8 +59,10 @@
         </div>
       </div>
     </div>
+  <% end %>
 
-    <!-- Promo Banner Section -->
+  <!-- Promo Banner Section Form -->
+  <%= form_with url: batch_update_admin_settings_path, method: :patch, multipart: true, class: "mb-6" do |f| %>
     <div class="bg-surface-dark rounded-xl border border-slate-700/50 overflow-hidden">
       <div class="p-6 border-b border-slate-700/50">
         <h2 class="text-lg font-bold text-white flex items-center gap-2">
@@ -126,8 +126,10 @@
         </div>
       </div>
     </div>
+  <% end %>
 
-    <!-- Hero Section -->
+  <!-- Hero Section Form -->
+  <%= form_with url: batch_update_admin_settings_path, method: :patch, multipart: true, class: "mb-6" do |f| %>
     <div class="bg-surface-dark rounded-xl border border-slate-700/50 overflow-hidden">
       <div class="p-6 border-b border-slate-700/50">
         <h2 class="text-lg font-bold text-white flex items-center gap-2">
@@ -186,8 +188,10 @@
         </div>
       </div>
     </div>
+  <% end %>
 
-    <!-- Footer CTA Section -->
+  <!-- Footer CTA Section Form -->
+  <%= form_with url: batch_update_admin_settings_path, method: :patch, class: "mb-6" do |f| %>
     <div class="bg-surface-dark rounded-xl border border-slate-700/50 overflow-hidden">
       <div class="p-6 border-b border-slate-700/50">
         <h2 class="text-lg font-bold text-white flex items-center gap-2">
@@ -213,7 +217,10 @@
         </div>
       </div>
     </div>
+  <% end %>
 
+  <!-- General Settings Form -->
+  <%= form_with url: batch_update_admin_settings_path, method: :patch, class: "mb-6" do |f| %>
     <!-- General Settings -->
     <% if @general_settings.any? %>
       <div class="bg-surface-dark rounded-xl border border-slate-700/50 overflow-hidden">
@@ -230,14 +237,14 @@
               <%= text_field_tag "settings[#{setting.key}]", setting.value, class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary" %>
             </div>
           <% end %>
+          
+          <!-- Save Button -->
+          <div class="pt-4 border-t border-slate-700/50">
+            <%= f.submit "Save General Settings", class: "w-full px-6 py-3 bg-primary hover:bg-blue-600 text-white font-bold rounded-lg transition-colors cursor-pointer" %>
+          </div>
         </div>
       </div>
     <% end %>
-
-    <!-- Submit Button -->
-    <div class="flex justify-end">
-      <%= f.submit "Save All Settings", class: "px-6 py-3 bg-primary hover:bg-blue-600 text-white font-bold rounded-lg transition-colors cursor-pointer" %>
-    </div>
   <% end %>
 
   <!-- Integrations Card -->
