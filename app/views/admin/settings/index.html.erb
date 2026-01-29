@@ -158,6 +158,16 @@
           </div>
         <% end %>
 
+        <!-- WhatsApp Number -->
+        <% whatsapp_setting = Setting.find_by(key: 'whatsapp_number') %>
+        <% if whatsapp_setting %>
+          <div>
+            <%= label_tag "settings[whatsapp_number]", "WhatsApp Number (for CTA button)", class: "block text-sm font-medium text-slate-300 mb-2" %>
+            <%= text_field_tag "settings[whatsapp_number]", whatsapp_setting.value, class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary", placeholder: "5493813416824" %>
+            <p class="text-xs text-slate-500 mt-1">Format: Country code + area code + number (no spaces or +)</p>
+          </div>
+        <% end %>
+
         <!-- Other hero settings -->
         <% @hero_settings.reject { |s| s.key == 'hero_bg_url' }.each do |setting| %>
           <div>
