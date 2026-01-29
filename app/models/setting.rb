@@ -1,5 +1,7 @@
 class Setting < ApplicationRecord
   has_one_attached :site_logo
+  has_one_attached :promo_bg_image
+  has_one_attached :hero_bg_image
 
   validates :key, presence: true, uniqueness: true
   validates :value, presence: true, allow_blank: true
