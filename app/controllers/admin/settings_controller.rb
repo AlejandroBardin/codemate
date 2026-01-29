@@ -30,7 +30,9 @@ class Admin::SettingsController < Admin::BaseController
 
     # Handle regular settings
     params[:settings]&.each do |key, value|
-      Setting.find_or_create_by(key: key).update(value: value)
+      setting = Setting.find_or_create_by(key: key)
+      result = setting.update(value: value)
+      Rails.logger.info "Setting #{key}: #{result ? 'updated' : 'failed'} to '#{value}'"
     end
 
     redirect_to admin_settings_path, notice: "Settings updated successfully"
