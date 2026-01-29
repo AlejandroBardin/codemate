@@ -16,9 +16,23 @@ class Admin::SettingsController < Admin::BaseController
       logo_setting.site_logo.attach(params[:site_logo])
     end
 
+    # Handle promo banner background image
+    if params[:promo_bg_image].present?
+      promo_bg_setting = Setting.find_or_create_by(key: "promo_banner_bg_url")
+      promo_bg_setting.promo_bg_image.attach(params[:promo_bg_image])
+    end
+
+    # Handle hero background image
+    if params[:hero_bg_image].present?
+      hero_bg_setting = Setting.find_or_create_by(key: "hero_bg_url")
+      hero_bg_setting.hero_bg_image.attach(params[:hero_bg_image])
+    end
+
     # Handle regular settings
     params[:settings]&.each do |key, value|
-      Setting.find_or_create_by(key: key).update(value: value)
+      setting = Setting.find_or_create_by(key: key)
+      result = setting.update(value: value)
+      Rails.logger.info "Setting #{key}: #{result ? 'updated' : 'failed'} to '#{value}'"
     end
 
     redirect_to admin_settings_path, notice: "Settings updated successfully"

@@ -17,17 +17,21 @@ puts "✅ Admin user ensured"
   { key: "site_logo_url", value: "" }, # Se puede agregar después
   { key: "site_tagline", value: "Automation & Software" },
 
+  # Promo Banner
+  { key: "promo_banner_enabled", value: "true" },
+  { key: "promo_banner_text", value: "🎉 LANZAMIENTO 2026" },
+  { key: "promo_banner_subtitle", value: "15% OFF en todos los paquetes - Solo por tiempo limitado" },
+  { key: "promo_banner_bg_url", value: "" }, # Background image URL or upload
+
   # Hero Section
   { key: "hero_badge_text", value: "Accepting new automation clients" },
   { key: "hero_badge_enabled", value: "true" },
   { key: "hero_title", value: "Building Scalable Automation for Rapid Growth Companies" },
   { key: "hero_title_highlight", value: "Scalable Automation" },
   { key: "hero_subtitle", value: "We deploy senior automation experts to build risk-free development sprints. Trusted by growing companies to ship faster." },
-  { key: "hero_cta_primary_text", value: "Start Your Sprint" },
-  { key: "hero_cta_primary_url", value: "#contact" },
-  { key: "hero_cta_secondary_text", value: "View Portfolio" },
-  { key: "hero_cta_secondary_url", value: "#portfolio" },
+  { key: "hero_cta_text", value: "Hablemos por WhatsApp" },
   { key: "hero_trusted_by_text", value: "Trusted by teams at" },
+  { key: "hero_bg_url", value: "" }, # Hero background image URL or upload
 
   # Footer CTA
   { key: "footer_cta_title", value: "Ready to automate your business?" },
