@@ -33,6 +33,11 @@ puts "✅ Admin user ensured"
   { key: "hero_trusted_by_text", value: "Trusted by teams at" },
   { key: "hero_bg_url", value: "" }, # Hero background image URL or upload
 
+
+  # Services Section
+  { key: "services_title", value: "Our Expertise" },
+  { key: "services_subtitle", value: "Specialized services for every stage of growth." },
+
   # Footer CTA
   { key: "footer_cta_title", value: "Ready to automate your business?" },
   { key: "footer_cta_subtitle", value: "Get a custom roadmap and estimate within 24 hours." },

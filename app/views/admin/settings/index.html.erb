@@ -185,6 +185,39 @@
         <!-- Save Button -->
         <div class="pt-4 border-t border-slate-700/50">
           <%= f.submit "Save Hero Settings", class: "w-full px-6 py-3 bg-primary hover:bg-blue-600 text-white font-bold rounded-lg transition-colors cursor-pointer" %>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- Services Section Form -->
+  <%= form_with url: batch_update_admin_settings_path, method: :patch, class: "mb-6" do |f| %>
+    <div class="bg-surface-dark rounded-xl border border-slate-700/50 overflow-hidden">
+      <div class="p-6 border-b border-slate-700/50">
+        <h2 class="text-lg font-bold text-white flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">grid_view</span>
+          Services Section
+        </h2>
+      </div>
+      <div class="p-6 space-y-4">
+        <% services_title = Setting.find_by(key: 'services_title') %>
+        <% if services_title %>
+          <div>
+            <%= label_tag "settings[services_title]", "Section Title", class: "block text-sm font-medium text-slate-300 mb-2" %>
+            <%= text_field_tag "settings[services_title]", services_title.value, class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary", placeholder: "Our Expertise" %>
+          </div>
+        <% end %>
+        
+        <% services_subtitle = Setting.find_by(key: 'services_subtitle') %>
+        <% if services_subtitle %>
+          <div>
+            <%= label_tag "settings[services_subtitle]", "Section Subtitle", class: "block text-sm font-medium text-slate-300 mb-2" %>
+            <%= text_field_tag "settings[services_subtitle]", services_subtitle.value, class: "w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary", placeholder: "Specialized services for every stage of growth." %>
+          </div>
+        <% end %>
+        
+        <!-- Save Button -->
+        <div class="pt-4 border-t border-slate-700/50">
+          <%= f.submit "Save Services Settings", class: "w-full px-6 py-3 bg-primary hover:bg-blue-600 text-white font-bold rounded-lg transition-colors cursor-pointer" %>
         </div>
       </div>
     </div>
