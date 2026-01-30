@@ -1,0 +1,92 @@
+<section class="px-4 py-16 relative overflow-hidden">
+  <!-- Background decoration -->
+  <div class="absolute right-0 top-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+  
+  <div class="max-w-7xl mx-auto relative z-10">
+    <!-- Section Header -->
+    <div class="mb-8">
+      <h2 class="text-2xl font-bold text-white mb-2"><%= @title %></h2>
+      <p class="text-gray-400"><%= @subtitle %></p>
+    </div>
+    
+    <!-- Featured Package Card -->
+    <div class="grid md:grid-cols-2 gap-8 bg-surface-dark rounded-2xl border border-slate-700/50 overflow-hidden hover:border-primary/50 transition-all duration-300">
+      <!-- Image Side -->
+      <div class="relative h-80 md:h-auto bg-gradient-to-br from-primary/20 to-primary/5">
+        <% if @package.main_image.attached? %>
+          <%= image_tag @package.main_image, class: "w-full h-full object-cover" %>
+        <% else %>
+          <div class="flex items-center justify-center h-full">
+            <span class="text-6xl text-primary/30 material-symbols-outlined">package_2</span>
+          </div>
+        <% end %>
+        
+        <!-- Category Badge -->
+        <% if @package.category.present? %>
+          <div class="absolute top-6 left-6">
+            <span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded-full backdrop-blur-sm">
+              <%= @package.category.upcase %>
+            </span>
+          </div>
+        <% end %>
+        
+        <!-- Badge (e.g., "Más Popular") -->
+        <% if @package.badge_text.present? %>
+          <div class="absolute top-6 right-6">
+            <span class="px-3 py-1 bg-green-500/20 text-green-400 text-xs font-bold rounded-full backdrop-blur-sm">
+              <%= @package.badge_text %>
+            </span>
+          </div>
+        <% end %>
+      </div>
+      
+      <!-- Content Side -->
+      <div class="p-8 flex flex-col justify-between">
+        <div>
+          <h3 class="text-3xl font-bold text-white mb-3"><%= @package.title %></h3>
+          <p class="text-gray-400 mb-6 leading-relaxed"><%= @package.description %></p>
+          
+          <!-- Includes -->
+          <% if @package.includes.present? %>
+            <div class="mb-6">
+              <h4 class="text-sm font-bold text-slate-300 mb-3">Incluye:</h4>
+              <div class="space-y-2">
+                <% @package.includes.split("\n").each do |item| %>
+                  <div class="flex items-start gap-2">
+                    <span class="material-symbols-outlined text-primary text-sm mt-0.5">check_circle</span>
+                    <span class="text-sm text-gray-400"><%= item %></span>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+          
+          <!-- Ideal For -->
+          <% if @package.ideal_for.present? %>
+            <p class="text-xs text-slate-500 mb-6">
+              <span class="font-semibold">Ideal para:</span> <%= @package.ideal_for %>
+            </p>
+          <% end %>
+        </div>
+        
+        <!-- Price & CTA -->
+        <div class="flex items-center justify-between pt-6 border-t border-slate-700/50">
+          <div>
+            <p class="text-sm text-slate-400">Precio</p>
+            <p class="text-3xl font-bold text-white"><%= @package.formatted_price %></p>
+            <% if @package.duration.present? %>
+              <p class="text-xs text-slate-500"><%= @package.duration %></p>
+            <% end %>
+          </div>
+          
+          <% if @package.cta_url.present? %>
+            <%= link_to @package.cta_url, class: "px-6 py-3 bg-primary hover:bg-blue-600 text-white font-bold rounded-lg transition-colors flex items-center gap-2" do %>
+              <%= @package.cta_text || "Ver detalles" %>
+              <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

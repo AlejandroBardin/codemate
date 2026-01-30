@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_28_170613) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_29_142455) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -100,7 +100,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_28_170613) do
   end
 
   create_table "packages", force: :cascade do |t|
+    t.string "badge_text"
+    t.string "category"
     t.datetime "created_at", null: false
+    t.string "cta_text"
+    t.string "cta_url"
     t.string "dates"
     t.text "description"
     t.string "duration"
@@ -109,7 +113,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_28_170613) do
     t.jsonb "extras", default: {}, null: false
     t.boolean "featured"
     t.text "gpt_prompt"
+    t.string "ideal_for"
     t.string "ideal_profile", default: [], array: true
+    t.text "includes"
     t.string "keyword"
     t.boolean "kids_friendly", default: false, null: false
     t.integer "max_age"

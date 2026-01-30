@@ -28,6 +28,13 @@ class Package < ApplicationRecord
   scope :upcoming, -> { where("start_date >= ?", Date.today) }
   scope :for_kids, -> { where(kids_friendly: true) }
   scope :active, -> { where(featured: true) }
+  scope :homepage_featured, -> { featured.where(enabled: true).order(position: :asc).first }
+
+  # Format price for display
+  def formatted_price
+    return "Consultar" if price.zero?
+    "Desde $#{price.to_i}"
+  end
 
   private
 

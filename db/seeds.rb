@@ -223,3 +223,62 @@ CaseStudy.find_or_create_by!(title: case_study_attrs[:title]) do |study|
   end
 end
 puts "✅ Case Study ensured"
+
+# Service Packages
+service_packages = [
+  {
+    title: "Landing Page Profesional",
+    description: "Landing page de alto impacto diseñada para maximizar conversiones. Diseño moderno, responsive y optimizado para SEO.",
+    price: 500,
+    duration: "1-2 semanas",
+    category: "WEB",
+    includes: "Diseño responsive\nSEO básico optimizado\nFormulario de contacto\nHosting incluido (1 año)\nDominio .com (1 año)\nCertificado SSL\n3 revisiones incluidas",
+    ideal_for: "Emprendedores, Freelancers, Pequeños negocios",
+    badge_text: "Más Popular",
+    cta_text: "Solicitar presupuesto",
+    cta_url: "#contact",
+    featured: true,
+    enabled: true,
+    position: 1,
+    stars: 5
+  },
+  {
+    title: "E-commerce Completo",
+    description: "Tienda online completa con carrito de compras, pasarela de pagos y panel de administración. Lista para vender desde el día 1.",
+    price: 2000,
+    duration: "3-4 semanas",
+    category: "ECOMMERCE",
+    includes: "Diseño personalizado\nCarrito de compras\nPasarela de pagos (Stripe/MercadoPago)\nPanel de administración\nGestión de inventario\nEnvíos automatizados\nSEO optimizado\nHosting (1 año)",
+    ideal_for: "Comercios, Marcas, Distribuidores",
+    badge_text: "Mejor Valor",
+    cta_text: "Ver demo",
+    cta_url: "/packages",
+    featured: false,
+    enabled: true,
+    position: 2,
+    stars: 5
+  },
+  {
+    title: "Automatización con IA",
+    description: "Automatiza procesos repetitivos con inteligencia artificial. Desde chatbots hasta análisis de datos automático.",
+    price: 1500,
+    duration: "2-3 semanas",
+    category: "AUTOMATION",
+    includes: "Análisis de procesos\nChatbot con IA (GPT-4)\nIntegraciones (WhatsApp, Email, CRM)\nDashboard de métricas\nCapacitación del equipo\nSoporte 30 días",
+    ideal_for: "Empresas con alto volumen de consultas",
+    badge_text: "80% Time Saved",
+    cta_text: "Agendar consulta",
+    cta_url: "#contact",
+    featured: false,
+    enabled: true,
+    position: 3,
+    stars: 5
+  }
+]
+
+service_packages.each do |pkg_data|
+  Package.find_or_create_by!(title: pkg_data[:title]) do |pkg|
+    pkg.assign_attributes(pkg_data)
+  end
+end
+puts "✅ Service Packages ensured"
